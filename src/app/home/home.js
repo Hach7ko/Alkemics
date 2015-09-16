@@ -38,7 +38,22 @@ angular.module( 'ngBoilerplate.home', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'HomeCtrl', function HomeController( $scope ) {
+.controller( 'HomeCtrl', function HomeController($scope, $http ) {
+
+        $scope.sortType     = 'name'; // set the default sort type
+        $scope.sortReverse  = false;  // set the default sort order
+        $scope.searchFish   = '';     // set the default search/filter term
+        $scope.products     = '';
+
+        $http.get('assets/products.json')
+            .success(function(response) {
+                $scope.products = response.data;
+                $scope.numberOfProducts = response.totalResults;
+                console.log(response);
+            })
+            .error(function(response){
+                $scope.products = [{heading:"Error",description:"Could not load json data"}];
+            });
 })
 
 ;

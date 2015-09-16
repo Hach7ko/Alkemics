@@ -1,4 +1,71 @@
-<div class="jumbotron">
+<div class="main">
+    <div class="container">
+
+        <h1>EXPLORATION</h1>
+
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="form-control" placeholder="Search da Product" ng-model="searchFish">
+                </div>
+            </div>
+        </form>
+
+        <p>Number of products : {{ numberOfProducts }}</p>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <td>
+                    <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                        name
+                        <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="#" ng-click="sortType = 'isBrandedBy.name'; sortReverse = !sortReverse">
+                        brand
+                        <span ng-show="sortType == 'isBrandedBy.name' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'isBrandedBy.name' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="#" ng-click="sortType = 'quantityNormalized'; sortReverse = !sortReverse">
+                        quantityNormalized
+                        <span ng-show="sortType == 'quantityNormalized' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'quantityNormalized' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="#" ng-click="sortType = 'certified'; sortReverse = !sortReverse">
+                        certified
+                        <span ng-show="sortType == 'certified' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'certified' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </td>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="product in products | orderBy:sortType:sortReverse | filter:searchFish">
+                <td>{{ product.nameLegal }}</td>
+                <td>{{ product.isBrandedBy.name }}</td>
+                <td>{{ product.quantityNormalized }}</td>
+                <td>{{ product.certified }}</td>
+            </tr>
+            </tbody>
+
+        </table>
+
+        <h1>VISUALIZATION</h1>
+
+
+    </div>
+</div>
+
+<!--<div class="jumbotron">
   <h1>Non-Trivial AngularJS Made Easy</h1>
 
   <p class="lead">
@@ -127,5 +194,5 @@
       </p>
     </div>
   </div>
-</div>
+</div>-->
 
